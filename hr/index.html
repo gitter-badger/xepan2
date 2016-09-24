@@ -1,0 +1,1790 @@
+<html>
+  <head>
+    <title>
+      Test results
+    </title>
+    <meta charset='utf-8'>
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round&amp;v2' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+             .layout {
+                 margin: 0 auto;
+                 max-width: 1000px;
+
+                 }
+                 body { font-family: arial, serif; margin: 0; padding: 0; background: #ecf0f1; font-size: 20px; }
+                 h1,h2,h3 { font-family: arial, serif; color: #7f8c8d; }
+                 h1 { font-size: 2.5em; }
+                 h2 { font-size: 1.3em; }
+         h3 { font-size: 1em; color: #84BBDD; margin: 0.5em 0; }
+
+                 table { border: none; margin: 0; padding: 0; font-size: 0.9em;}
+                 .scenarioStepsTable .stepName { padding: 5px; }
+
+                 .scenarioStepsTable td {
+                 border: 1px solid #ccc;
+                 font-family: 'Varela Round', arial;
+                 -webkit-border-radius: 5px;
+                 -moz-border-radius: 5px;
+                 border-radius: 5px;
+                 background: rgb(255,255,255); /* Old browsers */
+                 background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera11.10+ */
+                 background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+                 background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+
+                 }
+
+         @media (max-width: 1200px) {
+           #toolbar-filter {
+             display: none !important;
+           }
+         }
+
+         .scenarioStepsTable .nostyle {
+             background: none;
+             border: none;
+         }
+
+                 p {
+                    cursor: pointer;
+                 }
+
+         .scenarioRow>td>p {
+             padding: 5px;
+         }
+
+         .scenarioStepsTable .failedStep {
+             padding: 10px;
+             background: #ecf0f1;
+             border: 2px solid #e74c3c;
+             border-radius: 0px;
+             color:  #e74c3c;
+         }
+
+         .scenarioStepsTable .error {
+             background:  #999;
+             padding: 10px;
+             color: #fff;
+             border-radius: 0px;
+         }
+
+         .scenarioStepsTable.substeps td {
+             background: #bdc3c7;
+         }
+
+                 .header { font-size: large; font-weight: bold; }
+                 p.scenarioSuccess {
+                 background: rgb(157,213,58); /* Old browsers */
+                 }
+
+
+                 .scenario { color: black; }
+                 p.scenarioFailed, p.scenarioError { color: black;
+                   background: #e74c3c
+                 }
+
+                 table.scenarioFailed tr:last-child { font-weight: bold; }
+
+                 td.scenarioSuccess { color: green }
+                 td.scenarioFailed { color: red }
+                 .scenarioSkipped { color: teal; }
+                 .scenarioIncomplete { color: gray; }
+                 .scenarioStepsTable { margin-left: 10px; display: none; color: #333; }
+
+                 #stepContainerSummary {
+                 background: white;
+                 -webkit-border-radius: 5px;
+                 -moz-border-radius: 5px;
+                 border-radius: 5px;
+                 padding: 20px;
+                 }
+
+         .toggle {
+             background: rgba(255,255,255,0.5);
+             border-radius: 10px;
+             display: inline-block;
+             width: 20px;
+             height: 20px;
+             text-align: center;
+             margin: auto;
+             color: #666
+         }
+
+                 ul#toolbar-filter {
+            display: block;
+            position: fixed;
+            top: 20px;
+            left: 0px;
+            padding: 0px;
+                 }
+                 ul#toolbar-filter li {
+                    list-style: none;
+                    text-align: center;
+                        padding: 20px;
+                        background-color: #3498db;
+                 }
+                 ul#toolbar-filter li a, ul#toolbar-filter li a:hover, ul#toolbar-filter li a:visited {
+                    color: #34495e;
+                    text-decoration: none;
+                 }
+                 ul#toolbar-filter li.disabled {
+                        background-color: #bdc3c7;
+                 }
+    </style>
+    <script type="text/javascript">
+var showAll = true;
+    function showHide(nodeId, linkObj)
+    {
+    var subObj = document.getElementById('stepContainer' + nodeId);
+    var toggle = linkObj.childNodes[0];
+    if (toggle.innerHTML == '+') {
+      toggle.innerHTML = '-';
+      subObj.style.display='block';
+      subObj.style.width = '100%';
+    } else {
+      toggle.innerHTML = '+';
+      subObj.style.display='none';
+    }
+    }
+
+    function showAllScenarios() {
+    var toolbar = document.getElementById('toolbar-filter');
+    for (var i = 0; i < toolbar.children.length; i++) {
+      toolbar.children[i].className = '';
+    }
+
+    var trs = document.getElementsByTagName('tr');
+    for(var z = 0; z < trs.length; z++) {
+      trs[z].style.display = '';
+    }
+    showAll = true;
+    }
+
+    function toggleScenarios(name, linkObj) {
+    var links = document.getElementById('toolbar-filter').children;
+    var rows = document.getElementsByClassName('scenarioRow');
+    if (showAll) {
+        for (var i = 0; i < links.length; i++) {
+            links[i].className = 'disabled';
+        }
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+    }
+    showAll = false;
+
+    if (linkObj.className == '') {
+        linkObj.className = 'disabled';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'none';
+          }
+        }
+        return;
+    }
+    if (linkObj.className == 'disabled') {
+        linkObj.className = '';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'table-row';
+          }
+        }
+        return;
+    }
+
+    }
+    </script>
+  </head>
+  <body>
+    <ul id="toolbar-filter">
+      <li>
+        <a href="#" title="Show all" onclick="showAllScenarios()">◯</a>
+      </li>
+      <li>
+        <a href="#" title="Successful" onclick="toggleScenarios('scenarioSuccess', this.parentElement)"><strong>✔</strong> 1</a>
+      </li>
+      <li>
+        <a href="#" title="Failed" onclick="toggleScenarios('scenarioFailed', this.parentElement)"><strong>✗</strong> 16</a>
+      </li>
+      <li>
+        <a href="#" title="Skipped" onclick="toggleScenarios('scenarioSkipped', this.parentElement)"><strong>S</strong> 0</a>
+      </li>
+      <li>
+        <a href="#" title="Incomplete" onclick="toggleScenarios('scenarioIncomplete', this.parentElement)"><strong>I</strong> 0</a>
+      </li>
+    </ul>
+    <div class="layout">
+      <h1>
+        Codeception Results <small><span style="color: #e74c3c">FAILED</span> (140.4s)</small>
+      </h1>
+      <table border="0" style="width: 100%;">
+        <tr>
+          <td>
+            <h3>
+              Acceptance (travis) Tests
+            </h3>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioSuccess">
+          <td>
+            <p class="scenarioSuccess" onclick="showHide('1', this)">
+              <span class="toggle">+</span> _000_hrDespartmentCest: Test quick search <span style="color: #34495e; font-size: 70%;">39.07s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioSuccess">
+          <td>
+            <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer1">
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6360499a0e', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6360499a0e">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I am on page <span style="color: #732E81">"/admin"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=username]","management@xavoc.com"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=password]","admin"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">"Login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I see <span style="color: #732E81">"Dashboard"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I save session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait for text <span style="color: #732E81">"Department"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"Department"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Company","(//table/tbody/tr/td)[position()=1]"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I don't see element in dom <span style="color: #732E81">"table tbody tr:first-child td:last-child a"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6360499dc6', this)">
+                    <span class="toggle">+</span> search for
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6360499dc6">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=q]","comp"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I press key <span style="color: #732E81">"[data-shortname=q]",""</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I see element in dom <span style="color: #732E81">"span.icon-cancel"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Company","(//table/tbody/tr/td)[position()=1]"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636049a058', this)">
+                    <span class="toggle">+</span> search for
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636049a058">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=q]","xxxxssssss"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I press key <span style="color: #732E81">"[data-shortname=q]",""</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I see element in dom <span style="color: #732E81">"span.icon-cancel"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"No matching records found"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636049a2df', this)">
+                    <span class="toggle">+</span> search for
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636049a2df">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=q]",""</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I press key <span style="color: #732E81">"[data-shortname=q]",""</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I don't see <span style="color: #732E81">"No matching records found"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Company","(//table/tbody/tr/td)[position()=1]"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Active"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait page load
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"InActive"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait page load
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('2', this)">
+              <span class="toggle">+</span> _000_hrDespartmentCest: Test_add_department <span style="color: #34495e; font-size: 70%;">43.28s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer2">
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6363206002', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6363206002">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait for text <span style="color: #732E81">"Department"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"Department"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add Department"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320616d', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320616d">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=name]","Company"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait for element <span style="color: #732E81">".field-error-text"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Name value "Company" already exists"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320636f', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320636f">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=name]","Desining"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait for text <span style="color: #732E81">"Production Level must be filled",10</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320675e', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320675e">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=production_level]","initial_stage"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait for text <span style="color: #732E81">"Production_level must be an integer: eg 1234",5</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320695e', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320695e">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=production_level]","0"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait for text <span style="color: #732E81">"Production_level must be greater than 0",5</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6363206b2b', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6363206b2b">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=production_level]","1"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6363206c6f', this)">
+                    <span class="toggle">+</span> wait for page load
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6363206c6f">
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Desining",{"css":"table tbody tr:nth-child(2) td:first-child"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">{"css":"table tbody tr:nth-child(2) td:nth-child(5) a.pb_edit"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6363206e36', this)">
+                    <span class="toggle">+</span> wait for page load
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6363206e36">
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Editing Department"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see in field <span style="color: #732E81">"[data-shortname=name]","Desining"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320700b', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320700b">
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=name]","Designing"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Save"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e636320715e', this)">
+                    <span class="toggle">+</span> wait for page load
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636320715e">
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Designing"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I don't see <span style="color: #732E81">"Desining"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add Department"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e63632074be', this)">
+                    <span class="toggle">+</span> fill atk field
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e63632074be">
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=name]","test to delete"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I fill field <span style="color: #732E81">"[data-shortname=production_level]",2</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">"Add"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6363207664', this)">
+                    <span class="toggle">+</span> wait for page load
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6363207664">
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"test to delete"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">{"css":"table tbody tr:nth-child(3) td:nth-child(5) a.do-delete"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Unexpected modal dialog (text: Are you sure?): Are you sure?<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('3', this)">
+              <span class="toggle">+</span> _001_hrPostCest: Test post <span style="color: #34495e; font-size: 70%;">24.14s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer3">
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6364a6fe6f', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6364a6fe6f">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait for text <span style="color: #732E81">"Post"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I click <span style="color: #732E81">{"link":"Post"}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait <span style="color: #732E81">2</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait for text <span style="color: #732E81">"CEO"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">{"css":"table tbody tr td:nth-child(4) a.emails-accesible"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Permitted Emails"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">{"css":" button.editable-cancel"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait <span style="color: #732E81">2</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I click <span style="color: #732E81">{"css":"table tbody tr td:nth-child(5) a.do-view-post-employees"}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I see <span style="color: #732E81">"Post Employees"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  I wait <span style="color: #732E81">2</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName">
+                  <p onclick="showHide('57e6364a701dc', this)">
+                    <span class="toggle">+</span> close dialog
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6364a701dc">
+                    <tr>
+                      <td class="stepName">
+                        I execute js <span style="color: #732E81">"$.univ().closeDialog()"</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="stepName failedStep">
+                  I don't see <span style="color: #732E81">"Post Employees"</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Failed asserting that /admin/?page=xepan_hr_post&amp;status=Active<br>
+                  --&gt; 0<br>
+                  Company / CEO<br>
+                  HR<br>
+                  Projects<br>
+                  Marketing<br>
+                  Account<br>
+                  Commerce<br>
+                  Store<br>
+                  Production<br>
+                  Crm<br>
+                  0<br>
+                  SU<br>
+                  Super<br>
+                  Active<br>
+                  You Are Sitting Idle<br>
+                  Navigation<br>
+                  Emails<br>
+                  0 / 0<br>
+                  Website<br>
+                  Blog Category<br>
+                  Blog Post<br>
+                  All<br>
+                  1<br>
+                  Active<br>
+                  1<br>
+                  InActive<br>
+                  DASHBOARD<br>
+                  Post [Active :1]<br>
+                  Reminder<br>
+                  Add Post<br>
+                  All Department<br>
+                  DEPARTMENT POST SCHEDULE TIME E-MAIL EMPLOYE<br>
+                  &lt;debug&gt;[Content too long to display. See complete response in '/home/travis/build/xepan/hr/tests/_output/' directory]&lt;/debug&gt;<br>
+                  --&gt; does not contain "post employees".
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('4', this)">
+              <span class="toggle">+</span> _001_hrPostCest: Test_add_post <span style="color: #34495e; font-size: 70%;">2.72s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer4">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6364d67842', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6364d67842">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 65 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('5', this)">
+              <span class="toggle">+</span> _002_hrUserCest: Test user <span style="color: #34495e; font-size: 70%;">2.52s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer5">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e636502e45c', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636502e45c">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 155 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('6', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test employee <span style="color: #34495e; font-size: 70%;">2.38s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer6">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e63652c271b', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e63652c271b">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 92 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('7', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test_add_employee <span style="color: #34495e; font-size: 70%;">2.34s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer7">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6365568d47', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6365568d47">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 69 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('8', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test_add_employee_contact_email <span style="color: #34495e; font-size: 70%;">2.65s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer8">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e636584c84a', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636584c84a">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 73 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('9', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test_add_employee_contact_number <span style="color: #34495e; font-size: 70%;">2.45s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer9">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6365b097ab', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6365b097ab">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 73 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('10', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test_add_employee_contact_im <span style="color: #34495e; font-size: 70%;">2.38s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer10">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6365da850b', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6365da850b">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 111 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('11', this)">
+              <span class="toggle">+</span> _003_hrEmployeeCest: Test employee movement <span style="color: #34495e; font-size: 70%;">2.47s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer11">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e636605d9c6', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636605d9c6">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 102 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('12', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test affiliate <span style="color: #34495e; font-size: 70%;">2.3s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer12">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e63662e94cd', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e63662e94cd">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 65 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('13', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test_add_affiliate <span style="color: #34495e; font-size: 70%;">2.36s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer13">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e63665b654c', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e63665b654c">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 77 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('14', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test_add_affiliate_detail <span style="color: #34495e; font-size: 70%;">2.33s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer14">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e636684f9e0', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e636684f9e0">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 69 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('15', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test_add_affiliate_contact_email <span style="color: #34495e; font-size: 70%;">2.31s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer15">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6366af3b89', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6366af3b89">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 66 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('16', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test_add_affiliate_contact_number <span style="color: #34495e; font-size: 70%;">2.4s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer16">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6366d9bbe1', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6366d9bbe1">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 98 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <p class="scenarioFailed" onclick="showHide('17', this)">
+              <span class="toggle">+</span> _004_hrAffiliateCest: Test_add_affiliate_contact_im <span style="color: #34495e; font-size: 70%;">2.3s</span>
+            </p>
+          </td>
+        </tr>
+        <tr class="scenarioRow scenarioFailed">
+          <td>
+            <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer17">
+              <tr>
+                <td class="stepName failedStep">
+                  <p onclick="showHide('57e6367029d51', this)">
+                    <span class="toggle">+</span> click menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td class="nostyle">
+                  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer57e6367029d51">
+                    <tr>
+                      <td class="stepName">
+                        I load session snapshot <span style="color: #732E81">"login"</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName">
+                        I wait page load
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="stepName failedStep">
+                        I click <span style="color: #732E81">{"link":"HR"}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="error">
+                  Element is not clickable at point (88, 75). Other element would receive the click: &lt;div class="ui-widget-overlay ui-front"&gt;&lt;/div&gt;<br>
+                  Command duration or timeout: 65 milliseconds<br>
+                  Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'<br>
+                  System info: host: 'testing-gce-bb886df4-7f06-4416-ba65-cc2dee8504a4', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-92-generic', java.version: '1.7.0_80'<br>
+                  Session ID: 70255b41-e931-49ef-99f5-f546d36d3d0f<br>
+                  Driver info: org.openqa.selenium.firefox.FirefoxDriver<br>
+                  Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, cssSelectorsEnabled=true, databaseEnabled=true, browserName=firefox, handlesAlerts=true, nativeEvents=false, webStorageEnabled=true, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=47.0.1}]
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h2>
+              Summary
+            </h2>
+            <div id="stepContainerSummary">
+              <table border="0">
+                <tr>
+                  <td width="250" class="scenarioSuccess">
+                    Successful scenarios:
+                  </td>
+                  <td class="scenarioSuccessValue">
+                    <strong>1</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="scenarioFailed">
+                    Failed scenarios:
+                  </td>
+                  <td class="scenarioFailedValue">
+                    <strong>16</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="scenarioSkipped">
+                    Skipped scenarios:
+                  </td>
+                  <td class="scenarioSkippedValue">
+                    <strong>0</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="scenarioIncomplete">
+                    Incomplete scenarios:
+                  </td>
+                  <td class="scenarioIncompleteValue">
+                    <strong>0</strong>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

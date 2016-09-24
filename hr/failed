@@ -1,0 +1,16 @@
+tests/acceptance/_001_hrPostCest.php:testPost
+tests/acceptance/_000_hrDespartmentCest.php:test_add_department
+tests/acceptance/_001_hrPostCest.php:test_add_post
+tests/acceptance/_002_hrUserCest.php:testUser
+tests/acceptance/_003_hrEmployeeCest.php:testEmployee
+tests/acceptance/_003_hrEmployeeCest.php:test_add_employee
+tests/acceptance/_003_hrEmployeeCest.php:test_add_employee_contact_email
+tests/acceptance/_003_hrEmployeeCest.php:test_add_employee_contact_number
+tests/acceptance/_003_hrEmployeeCest.php:test_add_employee_contact_IM
+tests/acceptance/_003_hrEmployeeCest.php:testEmployeeMovement
+tests/acceptance/_004_hrAffiliateCest.php:testAffiliate
+tests/acceptance/_004_hrAffiliateCest.php:test_add_affiliate
+tests/acceptance/_004_hrAffiliateCest.php:test_add_affiliate_detail
+tests/acceptance/_004_hrAffiliateCest.php:test_add_affiliate_contact_email
+tests/acceptance/_004_hrAffiliateCest.php:test_add_affiliate_contact_number
+tests/acceptance/_004_hrAffiliateCest.php:test_add_affiliate_contact_IM
